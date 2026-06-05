@@ -1,0 +1,119 @@
+:root{
+    --background: #1e175f;
+    --primary-color: #88b3c7;
+    --secondary-color: #2a3535;
+    --accent-color: #8b8b8b;
+    --text-color: #ffffff;
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16pt;
+    color: var(--text-color);
+}
+body{
+    min-height: 100vh;
+    padding: 10px;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    margin-top: 100px;
+    margin-bottom: 20px;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent-color)
+}
+.wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+
+}
+.balance-card,
+.summary-card,
+.form-card,
+.transactions-card{
+    background: var(--secondary-color);
+    border: 1px solid white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 10px 25px #2a3535;
+}
+.summary{
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+.summary-card{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.balance-card{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.form-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+#transaction-form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#transaction-form input,
+#transaction-form select,
+#transaction-form button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+}
+
+#transaction-form input,
+#transaction-form select{
+    background: #fff;
+    color: #222;
+}
+
+#transaction-form button{
+    background: var(--primary-color);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.transactions-card{
+    width: 100%;
+}
+
+#transaction-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}

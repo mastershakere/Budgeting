@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Helper</title>
+    <link rel="stylesheet" href="display.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="title-bar">
+        <h1>BudgetingApp</h1>
+    </div>
+    <div class="wrapper">
+        <section class="balance-card">
+            <h2>Current Balance</h2>
+            <p id="balance">$0.00</p>
+        </section>
+
+        <section class="summary">
+            <div class="summary-card">
+                <h3>Income</h3>
+                <p id="income-total">$0.00</p>
+            </div>
+            <div class="summary-card">
+                <h3>Expenses</h3>
+                <p id="expense-total">$0.00</p>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h2>Add Transaction</h2>
+            <form id="transaction-form">
+                <input type="text" id="description" placeholder="Description">
+                <input type="number" id="amount" placeholder="Amount">
+                <select id="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <button type="submit">Add</button>
+            </form>
+        </section>
+
+        <section class="transactions-card">
+            <h2>Transactions</h2>
+            <ul id="transaction-list"></ul>
+        </section>
+    </div>
+</body>
+</html>

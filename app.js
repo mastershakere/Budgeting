@@ -13,6 +13,7 @@ transactionForm.addEventListener('submit', function(e) {
     const type = inputType.value;
 
     const transaction = {
+        id: Date.now(),
         description,
         amount: Number(amount),
         type
@@ -38,7 +39,6 @@ function updateTransactionList(data) {
 
         const textSpan = document.createElement("span");
         textSpan.textContent = `${item.description} - $${item.amount.toFixed(2)} (${item.type})`;
-
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.style.marginLeft = "8px";
@@ -53,8 +53,7 @@ function updateTransactionList(data) {
 
 
 
-    li.textContent = `${item.description} - $${item.amount}
-    (${item.type})`;
+    
     transactionList.appendChild(li);
         
     });
@@ -86,7 +85,7 @@ function deleteTransaction(id) {
     const index = transactions.findIndex (t => t.id === id);
     if (index === -1) return;
 
-    transactions.splice(index, -1);
+    transactions.splice(index, 1);
 
     updateTransactionList(transactions);
     totalUpdate();

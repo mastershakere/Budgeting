@@ -3,6 +3,24 @@ const amountInput = document.getElementById("amount");
 const textInput = document.getElementById("description");
 const inputType = document.getElementById("type");
 const transactionList = document.getElementById("transaction-list");
+const categoryInput = document.getElementById("category");
+const ctx = document.getElementById("expense-chart");
+
+const expenseChart = new Chart(ctx, {
+    type: "pie",
+    data: {
+        labels: ["Food", "Rent", "Transport", "Other"],
+        datasets: [{
+            data: [300, 1200, 150, 80],
+            backgroundColor: ["#ff6384", "#36a2eb",
+                "#ffce56", "#4bc0c0"]
+            }]
+
+        }
+});
+
+
+
 
 const transactions = getBudget();
 transactionForm.addEventListener('submit', function(e) {
@@ -16,8 +34,9 @@ transactionForm.addEventListener('submit', function(e) {
         id: Date.now(),
         description,
         amount: Number(amount),
-        type
-    }
+        type,
+        category: categoryInput.value
+    };
 
 
     transactions.push(transaction);
@@ -101,6 +120,21 @@ function saveBudget(){
 function getBudget(){
     const budget = localStorage.getItem("budget") || "[]";
     return JSON.parse(budget);
+}
+
+function getExpensebyCategory() {
+    const totals = {};
+
+    transactions.forEach(function (transaction) {
+        if (transaction.type === "expense") {
+            if (!totals[transaction.category]) {
+                totals[transaction.category] = 0;
+            }
+            totals[transaction.category] += transaction.amount;
+        }
+    });
+
+    return totals;
 }
 
 updateTransactionList(transactions);

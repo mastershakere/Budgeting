@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Helper</title>
     <link rel="stylesheet" href="display.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js" defer></script>
 </head>
 <body>
@@ -41,9 +42,25 @@
             </form>
         </section>
 
+        
+        <select id="category">
+            <option value="food">Food</option>
+            <option value="rent">Rent</option>
+            <option value="transport">Transport</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="other">Other</option>
+        </select>
+
+
         <section class="transactions-card">
             <h2>Transactions</h2>
             <ul id="transaction-list"></ul>
+        </section>
+
+
+        <section class="chart-card">
+            <h2>Spending Breakdown</h2>
+            <canvas id="expense-chart"></canvas>
         </section>
     </div>
 </body>

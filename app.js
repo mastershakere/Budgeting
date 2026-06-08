@@ -4,7 +4,7 @@ const textInput = document.getElementById("description");
 const inputType = document.getElementById("type");
 const transactionList = document.getElementById("transaction-list");
 
-const transactions = [];
+const transactions = getBudget();
 transactionForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -24,6 +24,7 @@ transactionForm.addEventListener('submit', function(e) {
 
     updateTransactionList(transactions);
     totalUpdate();
+    saveBudget();
 
     textInput.value = "";
     amountInput.value = "";
@@ -89,4 +90,18 @@ function deleteTransaction(id) {
 
     updateTransactionList(transactions);
     totalUpdate();
+    saveBudget();
 }
+
+function saveBudget(){
+    const budgetJson = JSON.stringify(transactions);
+    localStorage.setItem("budget", budgetJson);
+}
+
+function getBudget(){
+    const budget = localStorage.getItem("budget") || "[]";
+    return JSON.parse(budget);
+}
+
+updateTransactionList(transactions);
+totalUpdate();

@@ -117,3 +117,25 @@ h1{
     gap: 12px;
     margin-top: 16px;
 }
+#income-total {
+  color: #4caf50;
+}
+
+#expense-total {
+  color: #ff6b6b;
+}
+
+button {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 250px; /* or 30vh, 40vh, etc. */
+}

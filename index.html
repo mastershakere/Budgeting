@@ -28,7 +28,7 @@
                 <p id="expense-total">$0.00</p>
             </div>
         </section>
-
+        <input type="date" id="date">
         <section class="form-card">
             <h2>Add Transaction</h2>
             <form id="transaction-form">
@@ -42,7 +42,7 @@
             </form>
         </section>
 
-        
+
         <select id="category">
             <option value="food">Food</option>
             <option value="rent">Rent</option>
@@ -56,11 +56,14 @@
             <h2>Transactions</h2>
             <ul id="transaction-list"></ul>
         </section>
+        <button id="clear-all">Clear All</button>
 
 
         <section class="chart-card">
             <h2>Spending Breakdown</h2>
-            <canvas id="expense-chart"></canvas>
+            <div class="chart-container">
+                <canvas id="expense-chart"></canvas>
+            </div>
         </section>
     </div>
 </body>

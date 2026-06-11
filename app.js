@@ -5,19 +5,9 @@ const inputType = document.getElementById("type");
 const transactionList = document.getElementById("transaction-list");
 const categoryInput = document.getElementById("category");
 const ctx = document.getElementById("expense-chart");
-
-const expenseChart = new Chart(ctx, {
-    type: "pie",
-    data: {
-        labels: ["Food", "Rent", "Transport", "Other"],
-        datasets: [{
-            data: [300, 1200, 150, 80],
-            backgroundColor: ["#ff6384", "#36a2eb",
-                "#ffce56", "#4bc0c0"]
-            }]
-
-        }
-});
+const clearAllBtn = document.getElementById("clear-all");
+const dateInput = document.getElementById("date");
+let expenseChart = null;
 
 
 
@@ -35,6 +25,7 @@ transactionForm.addEventListener('submit', function(e) {
         description,
         amount: Number(amount),
         type,
+        date: dateInput.value,
         category: categoryInput.value
     };
 
@@ -43,22 +34,41 @@ transactionForm.addEventListener('submit', function(e) {
 
     updateTransactionList(transactions);
     totalUpdate();
+    updateChart();
     saveBudget();
 
     textInput.value = "";
     amountInput.value = "";
     inputType.value = "income";
 })
-
+clearAllBtn.addEventListener("click", function () {
+        const ok = confirm("Clear all transactions?");
+        if (!ok) return
+    
+        transactions.length = 0;
+        localStorage.removeItem("budget");
+        updateTransactionList(transactions);
+        totalUpdate();
+        updateChart();
+        saveBudget();
+});
 
 function updateTransactionList(data) {
     transactionList.innerHTML = "";
+
+    if (data.length === 0) {
+    const li = document.createElement("li");
+    li.textContent = "No transactions yet.";
+    li.classList.add("empty-state");
+    transactionList.appendChild(li);
+    return;
+  }
 
     data.forEach(function (item) {
         const li = document.createElement("li");
 
         const textSpan = document.createElement("span");
-        textSpan.textContent = `${item.description} - $${item.amount.toFixed(2)} (${item.type})`;
+        textSpan.textContent = `${item.description} - $${item.amount.toFixed(2)} (${item.type}) | ${item.category} | ${item.date}`;
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.style.marginLeft = "8px";
@@ -109,6 +119,7 @@ function deleteTransaction(id) {
 
     updateTransactionList(transactions);
     totalUpdate();
+    updateChart();
     saveBudget();
 }
 
@@ -122,7 +133,7 @@ function getBudget(){
     return JSON.parse(budget);
 }
 
-function getExpensebyCategory() {
+function getExpenseByCategory() {
     const totals = {};
 
     transactions.forEach(function (transaction) {
@@ -137,5 +148,38 @@ function getExpensebyCategory() {
     return totals;
 }
 
+function updateChart() {
+    const categoryTotals = getExpenseByCategory();
+    const labels = Object.keys(categoryTotals);
+    const values = Object.values(categoryTotals);
+
+    if (expenseChart) {
+        expenseChart.destroy();
+    }
+
+    expenseChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    "#ff6384",
+                    "#36a2eb",
+                    "#ffce56",
+                    "#4bc0c0",
+                    "#9955ff",
+                    "#ff9f40"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+
 updateTransactionList(transactions);
 totalUpdate();
+updateChart();
